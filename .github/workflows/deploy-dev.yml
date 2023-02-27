@@ -111,9 +111,10 @@ jobs:
         uses: appleboy/telegram-action@master
         with:
           # to: ${{ secrets.TELEGRAM_TO }}
-          to: 360209578 
-          #phpcat
-          # 5956451485, #vasiliy
+          to: |
+            5956451485, #vasiliy
+            360209578 #phpcat
+          
           # , # phpcat
           # 5152088168, # serhio
           token: ${{ secrets.TELEGRAM_TOKEN }}
