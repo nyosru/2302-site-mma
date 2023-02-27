@@ -8,47 +8,22 @@ on:
 jobs:
 
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+      - name: git pull on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          # port: ${{ secrets.PORT }}
+          script: |
+            cd ${{ secrets.FOLDER_DEV }} 
+            git config --global user.email "1@php-cat.com" 
+            git config --global user.name "Sergey" 
+            git fetch --all 
+            git reset --hard origin/dev
 
-
-    - name: Copy folder content recursively to remote
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        local: ./
-        remote: /www/admin/
-        host: ${{ secrets.SERVER_IP }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        password: ${{ secrets.SERVER_PASSWORD }}
-        rmRemote: true
-        tryKeyboard: true
-
-      #- name: git pull on server
-      #  uses: appleboy/ssh-action@master
-      #  # env:
-      #  #   username: ${{ secrets.GIT_USERNAME }}
-      #  #   password: ${{ secrets.GIT_PASSWORD }}
-      #  with:
-
-      #    host: ${{ secrets.SERVER_IP }}
-      #    port: 22
-
-      #    username: ${{ secrets.SERVER_USERNAME }}
-      #    password: ${{ secrets.SERVER_PASSWORD }}
-
-      #    script: |
-      #      cd ${{ secrets.FOLDER }} 
-      #      ssh -T git@github.com
-      #    # git config --global user.email "1@php-cat.com" 
-      #    # git config --global user.name "Sergey" 
-      #    # git fetch --all 
-      #    # git reset --hard origin/dev
-
-
-
-          # ${{ secrets.GIT_USERNAME }}
-          # ${{ secrets.GIT_PASSWORD }}
       # - name: laravel migrate
       #   uses: appleboy/ssh-action@master
       #   with:
@@ -56,6 +31,58 @@ jobs:
       #     username: ${{ secrets.SERVER_USERNAME }}
       #     password: ${{ secrets.SERVER_PASSWORD }}
       #     script: cd www && cd ${{ secrets.FOLDER }} && /opt/php74/bin/php artisan migrate
+
+
+
+
+  # deploy:
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #   - uses: actions/checkout@master
+
+  #   - name: Copy folder content recursively to remote
+  #     uses: garygrossgarten/github-action-scp@release
+  #     with:
+  #       local: ./
+  #       remote: /www/admin/
+  #       host: ${{ secrets.SERVER_IP }}
+  #       username: ${{ secrets.SERVER_USERNAME }}
+  #       password: ${{ secrets.SERVER_PASSWORD }}
+  #       rmRemote: true
+  #       tryKeyboard: true
+
+  #     #- name: git pull on server
+  #     #  uses: appleboy/ssh-action@master
+  #     #  # env:
+  #     #  #   username: ${{ secrets.GIT_USERNAME }}
+  #     #  #   password: ${{ secrets.GIT_PASSWORD }}
+  #     #  with:
+
+  #     #    host: ${{ secrets.SERVER_IP }}
+  #     #    port: 22
+
+  #     #    username: ${{ secrets.SERVER_USERNAME }}
+  #     #    password: ${{ secrets.SERVER_PASSWORD }}
+
+  #     #    script: |
+  #     #      cd ${{ secrets.FOLDER }} 
+  #     #      ssh -T git@github.com
+  #     #    # git config --global user.email "1@php-cat.com" 
+  #     #    # git config --global user.name "Sergey" 
+  #     #    # git fetch --all 
+  #     #    # git reset --hard origin/dev
+
+
+
+  #         # ${{ secrets.GIT_USERNAME }}
+  #         # ${{ secrets.GIT_PASSWORD }}
+  #     # - name: laravel migrate
+  #     #   uses: appleboy/ssh-action@master
+  #     #   with:
+  #     #     host: ${{ secrets.SERVER_IP }}
+  #     #     username: ${{ secrets.SERVER_USERNAME }}
+  #     #     password: ${{ secrets.SERVER_PASSWORD }}
+  #     #     script: cd www && cd ${{ secrets.FOLDER }} && /opt/php74/bin/php artisan migrate
 
   # setup_soft:
   #   runs-on: ubuntu-latest
@@ -111,13 +138,12 @@ jobs:
         uses: appleboy/telegram-action@master
         with:
           # to: ${{ secrets.TELEGRAM_TO }}
-          to: 5956451485, vasiliy, 360209578 ,phpcat
-          
+          to: 5956451485, vasiliy, 
+            360209578, phpcat,
           # , # phpcat
           # 5152088168, # serhio
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |            
-            🔆🔆🔆
-            👨🏻‍💻 ${{github.actor}} сделал ${{ github.event_name }}
-            в ${{github.branch}}
+          message: |
+            🔆🔆🔆 👨🏻‍💻 ${{github.actor}} сделал ${{ github.event_name }}
+          # в ${{github.branch}}
           # 🔆🔆🔆 ${{ github.repository }} 🔆🔆🔆
