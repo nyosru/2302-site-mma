@@ -1,0 +1,33 @@
+<?php
+return [
+    'users'=>'Users',
+    'deposits'=>'Payments',
+    'withdrawals'=>'Payments',
+
+    'permissions'=>'Permissions',
+    'user_private'=>'User data',
+    "user_role"=>"User_role",
+    'user_blocking'=>'User Ban',
+    'user_phone_link'=>'Linking a phone',
+    'user_payout'=>'Payout availability',
+    'user_payout_settings'=>'Availability of auto-payment',
+    'user_payment'=>'Payment availability',
+    'user_products'=>'User_products',
+    'user_balance'=>'User balance',
+    'user_withdrawals'=>'User payments',
+    'user_deposits'=>'User payments',
+    'notification'=>'Notifications',
+    'client'=>'Client',
+    'dashboard'=>'Dashboard',
+    'app'=>'Application',
+    'backup'=>'Backup',
+    'setting'=>'Settings',
+    'user'=>'User',
+    'users_log'=>'User log',
+    'log'=>'Log',
+
+    'view'=>'View',
+    'delete'=>'Delete',
+    'change'=>'change',
+    'create'=>'Create',
+];

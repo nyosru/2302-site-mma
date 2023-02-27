@@ -1,0 +1,96 @@
+version: "3.8"
+services:
+
+    mysql:
+        container_name: mysql
+        build:
+            context: ./docker/mysql/
+            dockerfile: Dockerfile
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '0000'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: 'mm'
+            MYSQL_USER: 'mm'
+            MYSQL_PASSWORD: '0000'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - ${DB_PATH_HOST}:/var/lib/mysql
+        networks:
+            - network
+
+
+    #++
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links: 
+            - mysql:db
+        ports:
+            - 6060:80
+        environment:
+            MYSQL_ROOT_PASSWORD: '0000'
+            UPLOAD_LIMIT: 300M
+        depends_on:
+            - mysql
+        networks:
+            - network
+
+    redis:
+        container_name: redis
+        image: redis:latest
+        command: redis-server --appendonly yes --replica-read-only no
+        ports:
+            - "6379:6379"
+        volumes:
+            - ${REDIS_PATH_HOST}:/var/lib/redis
+        environment:
+            - REDIS_REPLICATION_MODE=master
+        networks:
+            - network
+
+
+
+    app:
+        container_name: app
+        build:
+            context: .
+            dockerfile: ./docker/php8/Dockerfile
+        working_dir: /www/
+        volumes:
+            - www-export:/www-export
+            - ${WWW_PATH_HOST}:/www
+        depends_on:
+            - mysql
+            - redis
+        networks:
+            - network
+
+
+
+    nginx:
+        container_name: nginx
+        build:
+            context: ./docker
+            dockerfile: nginx/Dockerfile
+        depends_on:
+            - app
+        volumes:
+            - www-export:/www
+            - ./docker/certs:/certs
+        ports:
+            - "443:443"
+            - "80:80"
+        networks:
+            - network
+
+networks:
+    network:
+        driver: bridge
+
+volumes:  
+  www-export:
+  certs:
+  mysql:
+  redis:
+  www:

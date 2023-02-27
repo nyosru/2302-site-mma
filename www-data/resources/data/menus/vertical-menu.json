@@ -1,0 +1,67 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Home",
+      "icon": "home",
+      "tag": "",
+      "tagcustom": "",
+        "submenu": [
+            {
+                "url": "/admin/dashboard",
+                "name": "Dashboard",
+                "icon": "bx bx-world"
+            },
+            {
+                "url": "sk-layout-1-column",
+                "name": "Apps",
+                "icon": "bx bx-store",
+                "submenu": [
+                    {
+                        "url": "/admin/apps/create",
+                        "name": "create",
+                        "icon": "bx bx-plus"
+                    },
+                    {
+                        "url": "/admin/apps/list",
+                        "name": "list",
+                        "icon": "bx bx-list-ul"
+                    },
+                    {
+                        "url": "/admin/apps/listTrashed",
+                        "name": "trash",
+                        "icon": "bx bx-trash"
+                    }
+                ]
+            },
+            {
+                "url": "/admin/clients/list",
+                "name": "Clients",
+                "icon": "bx bx-circle"
+            },
+            {
+                "url": "/admin/users",
+                "name": "Users",
+                "icon": "bx bx-user",
+                "submenu": [
+                    {
+                        "url": "/admin/users/create",
+                        "name": "create",
+                        "icon": "bx bx-plus"
+                    },
+                    {
+                        "url": "/admin/users/list",
+                        "name": "list",
+                        "icon": "bx bx-list-ul"
+                    }
+                ]
+            },
+            {
+                "url": "/admin/settings",
+                "name": "Settings",
+                "icon": "bx bx-right-arrow-alt"
+            }
+        ]
+    }
+  ]
+}
