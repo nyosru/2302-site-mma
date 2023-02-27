@@ -18,10 +18,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           # port: ${{ secrets.PORT }}
           script: |
-            cd www 
             cd ${{ secrets.FOLDER }} 
-            git config --global user.email "1@php-cat.com" 
-            git config --global user.name "Sergey" 
             git fetch --all
             git reset --hard origin/dev
 
