@@ -17,13 +17,16 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           # port: ${{ secrets.PORT }}
-          
+
           script: |
             cd ${{ secrets.FOLDER }} 
             git config --global user.email "1@php-cat.com" 
             git config --global user.name "Sergey" 
             git fetch --all 
             git reset --hard origin/dev
+
+
+
 
       # - name: laravel migrate
       #   uses: appleboy/ssh-action@master
