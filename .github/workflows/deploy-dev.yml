@@ -179,6 +179,7 @@ jobs:
     runs-on: ubuntu-latest
     # needs:  [ setup_soft , copy_files_modules_to_public ]
     # needs:  [ setup_soft ]
+    needs: deploy 
     steps:
       - name: send telega
         uses: appleboy/telegram-action@master
