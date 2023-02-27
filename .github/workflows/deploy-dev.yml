@@ -42,8 +42,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            cd www 
-            cd ${{ secrets.FOLDER_DEV }} 
+            cd ${{ secrets.FOLDER }} 
             /opt/php74/bin/php artisan migrate
             /opt/php74/bin/php ./composer.phar i 
           # /opt/php74/bin/php ./composer.phar i --ignore-platform-req=ext-zip
