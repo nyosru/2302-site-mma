@@ -17,6 +17,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           # port: ${{ secrets.PORT }}
+          port: 22
           script: |
             cd ${{ secrets.FOLDER }} 
             git fetch --all
